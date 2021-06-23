@@ -6,7 +6,7 @@
 
 使用[pest](https://pest.rs)库作为解析器生成器，使用[PEG](https://en.wikipedia.org/wiki/Parsing_expression_grammar)描述文法，生成AST。
 
-分支`ast-dev`:
+分支`dev-ast`:
 
 - 在`src/pest-src/tiger.pest`中编写文法
 
