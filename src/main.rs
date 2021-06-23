@@ -3,19 +3,20 @@ extern crate pest;
 extern crate pest_derive;
 
 use pest::Parser;
+use std::env;
 use std::error::Error;
-use std::io::{self, Read};
 use std::fs::File;
+use std::io::Read;
 
 #[derive(Parser)]
-#[grammar = "../pest-src/csv.pest"]
-pub struct CSVParser;
+#[grammar = "./pest-src/tiger.pest"]
+pub struct TigerParser;
 
 fn main() -> Result<(), Box<dyn Error>> {
+    let args: Vec<String> = env::args().collect();
     let mut buffer = String::new();
-    let mut fd = File::open("prog.src")?;
-    fd.read_to_string(&mut buffer)?;
-    let parse_result = CSVParser::parse(Rule::field, &buffer[..]);
-    println!("{:?}", parse_result);
+    File::open(&args[1])?.read_to_string(&mut buffer)?;
+    let parse_result = TigerParser::parse(Rule::main, &buffer[..]);
+    println!("{:#?}", parse_result);
     Ok(())
 }
